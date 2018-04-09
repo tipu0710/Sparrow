@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.tsult.sparrow.SettingsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_image"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_face_black_48dp" />
+
+    <TextView
+        android:id="@+id/settings_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Display Name"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/settings_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="@string/status"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/settings_img_cng_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/settings_status_cng_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:text="Change Image"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="#E8DFDD"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/settings_status_cng_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="Change Status"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="#ffffff"
+        android:background="#F62F14"
+        android:textSize="15sp" />
+
+
+
+
+</RelativeLayout>

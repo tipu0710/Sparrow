@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<EditText
+    android:id="@+id/chng_stts_et"
+    android:text="@string/default_status"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/cng_stts_btn"
+        android:text="change"
+        android:layout_below="@id/chng_stts_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
