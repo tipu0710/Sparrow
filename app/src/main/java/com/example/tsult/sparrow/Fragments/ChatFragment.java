@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,9 @@ import android.widget.TextView;
 
 import com.example.tsult.sparrow.ChatActivity;
 import com.example.tsult.sparrow.Conv;
+import com.example.tsult.sparrow.GroupChat;
 import com.example.tsult.sparrow.R;
+import com.example.tsult.sparrow.SelectFriendActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -26,8 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,6 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatFragment extends Fragment {
 
     private RecyclerView mConvList;
+    private FloatingActionButton newGroup;
 
     private DatabaseReference mConvDatabase;
     private DatabaseReference mMessageDatabase;
@@ -60,6 +62,7 @@ public class ChatFragment extends Fragment {
         mMainView = inflater.inflate(R.layout.fragment_chat, container, false);
 
         mConvList = mMainView.findViewById(R.id.conv_list);
+        newGroup = mMainView.findViewById(R.id.new_group);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
@@ -77,6 +80,15 @@ public class ChatFragment extends Fragment {
 
         mConvList.setHasFixedSize(true);
         mConvList.setLayoutManager(linearLayoutManager);
+
+        newGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent newIntent = new Intent(getContext(), SelectFriendActivity.class);
+                startActivity(newIntent);
+            }
+        });
 
 
         // Inflate the layout for this fragment
@@ -115,7 +127,6 @@ public class ChatFragment extends Fragment {
                             data = "image";
                         }
                         convViewHolder.setMessage(data, conv.isSeen());
-
                     }
 
                     @Override
@@ -146,11 +157,15 @@ public class ChatFragment extends Fragment {
 
                         final String userName = dataSnapshot.child("name").getValue().toString();
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                        final String type = dataSnapshot.child("type").getValue().toString();
 
-                        if(dataSnapshot.hasChild("online")) {
+                        if (type.equals("single")){
+                            if(dataSnapshot.hasChild("online")) {
 
-                            String userOnline = dataSnapshot.child("online").getValue().toString();
-                            convViewHolder.setUserOnline(userOnline);
+                                String userOnline = dataSnapshot.child("online").getValue().toString();
+                                convViewHolder.setUserOnline(userOnline);
+
+                            }
 
                         }
 
@@ -161,12 +176,17 @@ public class ChatFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
 
-
-                                Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-                                chatIntent.putExtra("user_id", list_user_id);
-                                chatIntent.putExtra("user_name", userName);
-                                startActivity(chatIntent);
-
+                                if (type.equals("single")){
+                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                    chatIntent.putExtra("user_id", list_user_id);
+                                    chatIntent.putExtra("user_name", userName);
+                                    startActivity(chatIntent);
+                                }else {
+                                    Intent groupIntent = new Intent(getContext(), GroupChat.class);
+                                    groupIntent.putExtra("user_id", list_user_id);
+                                    groupIntent.putExtra("user_name", userName);
+                                    startActivity(groupIntent);
+                                }
                             }
                         });
 

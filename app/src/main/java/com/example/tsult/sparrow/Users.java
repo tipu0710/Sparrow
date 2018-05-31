@@ -9,15 +9,25 @@ public class Users {
     private String name;
     private String status;
     private String thumb_image;
+    private String type;
 
     public Users() {
     }
 
-    public Users(String image, String name, String status, String thumb_image) {
+    public Users(String image, String name, String status, String thumb_image, String type) {
         this.image = image;
         this.name = name;
         this.status = status;
         this.thumb_image = thumb_image;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getImage() {

@@ -9,11 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,7 +38,7 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        mToolbar = (Toolbar) findViewById(R.id.all_user_bar);
+        mToolbar = findViewById(R.id.all_user_bar);
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setTitle("All Users");
@@ -43,7 +48,7 @@ public class UserActivity extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
 
-        mUsersList = (RecyclerView) findViewById(R.id.user_list);
+        mUsersList = findViewById(R.id.user_list);
         mUsersList.setHasFixedSize(true);
         mUsersList.setLayoutManager(mLayoutManager);
     }
@@ -63,22 +68,27 @@ public class UserActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int position) {
 
-                usersViewHolder.setDisplayName(users.getName());
-                usersViewHolder.setUserStatus(users.getStatus());
-                usersViewHolder.setUserImage(users.getThumb_image(), getApplicationContext());
+                if (users.getType().equals("single")){
+                    usersViewHolder.setDisplayName(users.getName());
+                    usersViewHolder.setUserStatus(users.getStatus());
+                    usersViewHolder.setUserImage(users.getThumb_image());
 
-                final String user_id = getRef(position).getKey();
+                    final String user_id = getRef(position).getKey();
 
-                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                        Intent profileIntent = new Intent(UserActivity.this, ProfileActivity.class);
-                        profileIntent.putExtra("user_id", user_id);
-                        startActivity(profileIntent);
+                            Intent profileIntent = new Intent(UserActivity.this, ProfileActivity.class);
+                            profileIntent.putExtra("user_id", user_id);
+                            startActivity(profileIntent);
 
-                    }
-                });
+                        }
+                    });
+                }else{
+                    usersViewHolder.mView.setLayoutParams(new RelativeLayout.LayoutParams(0,0));
+                    usersViewHolder.mView.setVisibility(View.GONE);
+                }
 
             }
         };
@@ -102,20 +112,20 @@ public class UserActivity extends AppCompatActivity {
 
         public void setDisplayName(String name){
 
-            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
+            TextView userNameView = mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
 
         }
 
         public void setUserStatus(String status){
 
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            TextView userStatusView = mView.findViewById(R.id.user_single_status);
             userStatusView.setText(status);
 
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = mView.findViewById(R.id.profile_pic);
 
@@ -125,4 +135,5 @@ public class UserActivity extends AppCompatActivity {
 
 
     }
+
 }

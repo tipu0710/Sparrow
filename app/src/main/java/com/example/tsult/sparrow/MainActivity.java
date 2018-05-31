@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.tsult.sparrow.Fragments.FriendFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -45,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager = findViewById(R.id.main_view_pager);
         sectionPagerAdepter = new SectionPagerAdepter(getSupportFragmentManager());
-
         mViewPager.setAdapter(sectionPagerAdepter);
+        mViewPager.setCurrentItem(1);
 
         tabLayout = findViewById(R.id.main_tab);
         tabLayout.setupWithViewPager(mViewPager);
@@ -103,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
         }else if (item.getItemId() == R.id.all_user){
             Intent allUserIntent = new Intent(MainActivity.this, UserActivity.class);
             startActivity(allUserIntent);
+        }else if (item.getItemId() == R.id.create_group){
+            Intent openFriendIntent = new Intent(MainActivity.this, FriendFragment.class);
+            startActivity(openFriendIntent);
         }
 
         return true;

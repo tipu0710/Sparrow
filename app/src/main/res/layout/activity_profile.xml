@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_face_black_48dp" />
+        app:srcCompat="@drawable/ic_face_black_48dp"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/profile_displayName"

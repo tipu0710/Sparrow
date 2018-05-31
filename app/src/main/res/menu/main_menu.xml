@@ -5,6 +5,8 @@
         android:title="Account Settings" />
     <item android:id="@+id/all_user"
         android:title="All user"/>
+    <item android:id="@+id/create_group"
+        android:title="Create Group"/>
     <item
         android:id="@+id/main_logout"
         android:title="Logout" />

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.tsult.sparrow.Fragments.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -9,7 +10,18 @@
         android:id="@+id/conv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"></android.support.v7.widget.RecyclerView>
+        android:layout_alignParentStart="true" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/new_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/right" />
 
 </RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/request_profile_pic"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/request_user_single_name"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:src="@drawable/ic_face_black_48dp" />
+
+    <TextView
+        android:id="@+id/request_user_single_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="18dp"
+        android:text="User Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/request_user_single_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/request_user_single_name"
+        android:layout_alignLeft="@+id/request_user_single_name"
+        android:layout_below="@+id/request_user_single_name"
+        android:layout_marginTop="10dp"
+        android:text="User @string/request_default_status" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/request_ok_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/okxhdpi"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/request_profile_pic"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/request_cancle_btn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignBottom="@+id/request_profile_pic"
+        android:layout_alignStart="@+id/request_ok_button"
+        android:layout_alignLeft="@+id/request_ok_button"
+        android:src="@drawable/calclexhdpi" />
+
+
+</RelativeLayout>

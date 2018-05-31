@@ -18,10 +18,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +57,8 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mCurrentUserId;
 
+    private DatabaseReference mUserRef;
+
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
     private EditText mChatMessageView;
@@ -78,16 +82,17 @@ public class ChatActivity extends AppCompatActivity {
     //New Solution
     private int itemPos = 0;
 
-    private String mLastKey = "";
+    private String mLastKey = "", name;
     private String mPrevKey = "";
 
 
+    private FirebaseAuth mAuth1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        mChatToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
+        mChatToolbar = findViewById(R.id.chat_app_bar);
         setSupportActionBar(mChatToolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -97,6 +102,7 @@ public class ChatActivity extends AppCompatActivity {
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+
         mCurrentUserId = mAuth.getCurrentUser().getUid();
 
         mChatUser = getIntent().getStringExtra("user_id");
@@ -171,6 +177,17 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        mRootRef.child("Users").child(mCurrentUserId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                name = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -181,6 +198,9 @@ public class ChatActivity extends AppCompatActivity {
                     Map chatAddMap = new HashMap();
                     chatAddMap.put("seen", false);
                     chatAddMap.put("timestamp", ServerValue.TIMESTAMP);
+                    chatAddMap.put("type", "single");
+                    chatAddMap.put("access", true);
+                    chatAddMap.put("LeaveTime", 0);
 
                     Map chatUserMap = new HashMap();
                     chatUserMap.put("Chat/" + mCurrentUserId + "/" + mChatUser, chatAddMap);
@@ -461,6 +481,7 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("type", "text");
             messageMap.put("time", ServerValue.TIMESTAMP);
             messageMap.put("from", mCurrentUserId);
+            messageMap.put("name", name);
 
             Map messageUserMap = new HashMap();
             messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
@@ -490,4 +511,5 @@ public class ChatActivity extends AppCompatActivity {
         }
 
     }
+
 }

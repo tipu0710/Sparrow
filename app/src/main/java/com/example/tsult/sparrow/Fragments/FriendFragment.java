@@ -62,7 +62,7 @@ public class FriendFragment extends Fragment {
         // Inflate the layout for this fragment
         mMainView = inflater.inflate(R.layout.fragment_friend, container, false);
 
-        mFriendsList = (RecyclerView) mMainView.findViewById(R.id.friend_list);
+        mFriendsList = mMainView.findViewById(R.id.friend_list);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
@@ -115,7 +115,7 @@ public class FriendFragment extends Fragment {
                         }
 
                         friendsViewHolder.setName(userName);
-                        friendsViewHolder.setUserImage(userThumb, getContext());
+                        friendsViewHolder.setUserImage(userThumb);
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -199,7 +199,7 @@ public class FriendFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = mView.findViewById(R.id.profile_pic);
             Picasso.get().load(thumb_image).placeholder(R.drawable.ic_face_black_48dp).into(userImageView);

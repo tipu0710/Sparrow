@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/chat_app_bar">
+        android:layout_below="@+id/chat_app_bar"
+        android:layout_alignParentLeft="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/messages_list"
@@ -24,7 +25,8 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/linearLayout"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/chat_app_bar"></android.support.v7.widget.RecyclerView>
+            android:layout_below="@+id/chat_app_bar"
+            android:layout_alignParentLeft="true" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:background="@android:color/white"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -46,7 +49,8 @@
             android:alpha="0.5"
             android:background="@android:color/white"
             android:padding="10dp"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/ic_add_black_24dp"
+            />
 
         <EditText
             android:id="@+id/chat_message_view"
@@ -55,7 +59,7 @@
             android:layout_weight="8"
             android:background="@android:color/white"
             android:ems="10"
-            android:hint="Enter Message..."
+            android:hint="@string/enter_message"
             android:inputType="textPersonName"
             android:paddingBottom="12dp"
             android:paddingLeft="10dp"

@@ -5,7 +5,7 @@ package com.example.tsult.sparrow;
  */
 
 class Messages {
-    private String message, type;
+    private String message, type, name;
     private long  time;
     private boolean seen;
 
@@ -23,11 +23,20 @@ class Messages {
         this.from = from;
     }
 
-    public Messages(String message, String type, long time, boolean seen) {
+    public Messages(String message, String type, long time, boolean seen, String name) {
         this.message = message;
         this.type = type;
         this.time = time;
         this.seen = seen;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMessage() {

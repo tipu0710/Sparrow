@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put(getString(R.string.image), "default");
                     userMap.put(getString(R.string.thumb_image), "default");
                     userMap.put("device_token", deviceToken);
+                    userMap.put("type", "single");
 
                     databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
